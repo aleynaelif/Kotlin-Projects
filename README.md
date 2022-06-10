@@ -2,7 +2,7 @@
  The projects that I developed during the mobile app development course
 
 
- - sharedPreferences
+ - StoringData
 
     Basic example to understand how sharedPreferences work. The app takes input from user. If user clicks the save button, given data is saved. Even if user has closed the application, when he/she opens it again, he/she can see the last recorded data. When user clicks the delete button, last saved data is deleted. 
 
@@ -11,7 +11,7 @@
 
     This is a implemantation of intent in kotlin. Basicly app takes 2 inputs and prints them in another activity.
 
-- AlarmDialog
+- AlertDialog
 
     Alert and Toast message practise
 
@@ -22,3 +22,7 @@
 - StopWatch
 
     Basic stopwatch example. This app includes runnable and handler.
+
+- CathcingGame
+
+    Same project as the https://github.com/aleynaelif/Java-Projects/tree/main/CathcingGame but this one is kotlin version.
