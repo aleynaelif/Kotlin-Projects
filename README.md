@@ -10,3 +10,7 @@
 - KotlinIntent
 
 This is a implemantation of intent in kotlin. Basicly app takes 2 inputs and prints them in another activity.
+
+- AlarmDialog
+
+- Alert and Toast message practise
