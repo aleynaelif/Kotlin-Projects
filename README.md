@@ -13,4 +13,8 @@ This is a implemantation of intent in kotlin. Basicly app takes 2 inputs and pri
 
 - AlarmDialog
 
-- Alert and Toast message practise
+Alert and Toast message practise
+
+-Countdown
+
+Basic timer example. It's using CountDownTimer.
