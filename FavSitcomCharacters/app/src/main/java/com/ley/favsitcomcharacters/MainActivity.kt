@@ -5,17 +5,18 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ley.favsitcomcharacters.databinding.ActivityDetailsBinding
+import com.ley.favsitcomcharacters.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityDetailsBinding
+    private lateinit var binding : ActivityMainBinding
     private lateinit var sitcomList : ArrayList<Sitcom>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
 
         //Initilize
         sitcomList = ArrayList<Sitcom>()
@@ -32,9 +33,11 @@ class MainActivity : AppCompatActivity() {
         sitcomList.add(phoebe)
         sitcomList.add(sheldon)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        binding.recyclerViewNew.layoutManager = LinearLayoutManager(this)
         val sitcomAdapter = SitcomAdapter (sitcomList)
-        binding.recyclerView= sitcomAdapter
+        binding.recyclerViewNew.adapter = sitcomAdapter
+
 
     }
 }
