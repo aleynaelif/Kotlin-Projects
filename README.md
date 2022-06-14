@@ -29,3 +29,6 @@
 
 - Favorite Sitcom Characters
     This application lists my favorite sitcom characters. Clicking on the characters shows the character's photo, the show's name, and his/her name. Project includes singleton, recycleView, view binding.
+
+- SQLite
+    Example for using SQLite. This code contains the usage of SELECT, WHERE, LIKE, UPDATE, DELETE keywords.
