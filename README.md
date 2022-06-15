@@ -32,3 +32,6 @@
 
 - SQLite
     Example for using SQLite. This code contains the usage of SELECT, WHERE, LIKE, UPDATE, DELETE keywords.
+
+- FavAlbums
+    Same project as the https://github.com/aleynaelif/Java-Projects/tree/main/FavAlbums bu this is the kotlin version.
