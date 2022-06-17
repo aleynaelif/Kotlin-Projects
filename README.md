@@ -38,3 +38,7 @@
 - FavAlbums
 
     Same project as the https://github.com/aleynaelif/Java-Projects/tree/main/FavAlbums bu this is the kotlin version.
+
+- InstagramClone
+
+    Same project as the https://github.com/aleynaelif/Java-Projects/tree/main/InstagramClone bu this is the kotlin version.

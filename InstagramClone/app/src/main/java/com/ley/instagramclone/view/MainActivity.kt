@@ -1,4 +1,4 @@
-package com.ley.instagramclone
+package com.ley.instagramclone.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
 
         if(currentUser != null){
-            val intent = Intent(this,FeedActivity::class.java)
+            val intent = Intent(this, FeedActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         else{
             auth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
                 //success
-                val intent = Intent(this@MainActivity,FeedActivity::class.java)
+                val intent = Intent(this@MainActivity, FeedActivity::class.java)
                 startActivity(intent)
                 finish()
             }.addOnFailureListener {
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         else{
             auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener {
                 //success
-                val intent = Intent(this@MainActivity,FeedActivity::class.java)
+                val intent = Intent(this@MainActivity, FeedActivity::class.java)
                 startActivity(intent)
                 finish()
             }.addOnFailureListener {

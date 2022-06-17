@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "714206675800",
-    "project_id": "kotlininstagramclone-7fd67",
-    "storage_bucket": "kotlininstagramclone-7fd67.appspot.com"
+    "project_number": "18964183591",
+    "project_id": "kotlininsta-af938",
+    "storage_bucket": "kotlininsta-af938.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:714206675800:android:cda0827fe76240c9651b2d",
+        "mobilesdk_app_id": "1:18964183591:android:66365ec2f440be98e1ac02",
         "android_client_info": {
           "package_name": "com.ley.instagramclone"
         }
       },
       "oauth_client": [
         {
-          "client_id": "714206675800-3j6ct9hcs48d5cs571voiu94gdqa2j9q.apps.googleusercontent.com",
+          "client_id": "18964183591-9pb0h9o47jjajfgklf1jh8hpcjsi4089.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC2nnEXn5VObEeLOTTMSRaGgkNTqsWn6j0"
+          "current_key": "AIzaSyCbstVMHLZp2lPBSF81r1t3WHRgj9Pgc9M"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "714206675800-3j6ct9hcs48d5cs571voiu94gdqa2j9q.apps.googleusercontent.com",
+              "client_id": "18964183591-9pb0h9o47jjajfgklf1jh8hpcjsi4089.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
