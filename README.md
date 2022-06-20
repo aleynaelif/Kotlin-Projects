@@ -42,3 +42,11 @@
 - InstagramClone
 
     Same project as the https://github.com/aleynaelif/Java-Projects/tree/main/InstagramClone bu this is the kotlin version.
+
+- Fragment
+
+    Basic implementation of fragments.
+
+- Navigation
+
+    Basic implementation of navigation.
