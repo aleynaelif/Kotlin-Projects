@@ -40,6 +40,7 @@ class MainActivity : ComponentActivity() {
                 ){
                     //LearnTextAndModifiers()
                     //LearnRowColumBox()
+                    //LearnAlignmentArrangement()
                 }
             }
         }
@@ -63,7 +64,7 @@ fun LearnTextAndModifiers(){
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun LearnTextAndModifiersPreview() {
     ComposeTheme {
         LearnTextAndModifiers()
     }
@@ -95,13 +96,63 @@ fun LearnRowColumBox(){
 
 
     //Box Layout
-    Box (modifier = Modifier.fillMaxSize().background(Color.Magenta), contentAlignment = Alignment.Center){
-        Box (modifier = Modifier.height(300.dp).width(300.dp).background(Color.Blue)){
+    Box (modifier = Modifier
+        .fillMaxSize()
+        .background(Color.Magenta), contentAlignment = Alignment.Center){
+        Box (modifier = Modifier
+            .height(300.dp)
+            .width(300.dp)
+            .background(Color.Blue)){
             Text(text = "Hello Box 1",
                 modifier = Modifier.align(Alignment.Center),
                 color = Color.White,
                 fontSize = 32.sp
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LearnRowColumBoxPreview() {
+    ComposeTheme {
+        LearnRowColumBox()
+    }
+}
+
+//Alignment = Cross Axis (Row = Vertical, Column = Horizontal)
+//Arrangement = Main Axis (Row = Horizontal, Column = Vertical)
+
+@Composable
+fun LearnAlignmentArrangement(){
+    //RowAlignment: Top, CenterVertically, Bottom
+    //ColumnAlignment: Start, CenterHorizontally, End, SpaceBetween, SpaceAround, SpaceEvenly
+    //Absolute.Left, Absolute.Center, Absolute.Right
+    //Absolute.SpaceBetween, Absolute.SpaceAround, Absolute.SpaceEvenly
+    
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+        Text(text = "Row Alignment Arrangement")
+    }
+
+    //ColumnAlignment: Start, CenterHorizontally, End
+    //ColumnArrangement: Top, Center, Bottom, SpaceBetween, SpaceAround, SpaceEvenly
+
+    Column(horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Center) {
+        Text(text = "Column Alignment Arrangement")
+    }
+
+    //BoxAlignment = TopStart, TopCenter, TopEnd, CenterStart, Center, CenterEnd, BottomStart, BottomCenter, BottomEnd
+
+    Box (contentAlignment = Alignment.BottomCenter){
+        Text(text = "Box Alignment", modifier = Modifier.align(Alignment.Center))
+        // Modifierla başka bir alignment belirtirsek program onu takip eder. Bottom center yerine centerı çalıştırır.
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LearnAlignmentArrangementPreview() {
+    ComposeTheme {
+        LearnAlignmentArrangement()
     }
 }
