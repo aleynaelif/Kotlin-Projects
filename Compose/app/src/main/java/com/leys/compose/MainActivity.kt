@@ -23,6 +23,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,6 +55,7 @@ class MainActivity : ComponentActivity() {
                     //LearnAlignmentArrangement()
                     //LearnButton()
                     //LearnImage()
+                    //LearnState()
                 }
             }
         }
@@ -197,5 +203,30 @@ fun LearnImage(){
 fun LearnImagePreview() {
     ComposeTheme {
         LearnImage()
+    }
+}
+
+@Composable
+fun LearnState(){
+
+    //var age = 0
+
+    var age by remember {
+        mutableIntStateOf(0)
+    }
+
+    Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+        Button(onClick = { age++ }) {
+            Text(text = "Age: $age")
+        }
+
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LearnStatePreview() {
+    ComposeTheme {
+        LearnState()
     }
 }
