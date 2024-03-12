@@ -17,11 +17,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -38,6 +47,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.leys.compose.ui.theme.Beige
 import com.leys.compose.ui.theme.ComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,7 +57,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    //modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ){
                     //LearnTextAndModifiers()
@@ -56,6 +66,7 @@ class MainActivity : ComponentActivity() {
                     //LearnButton()
                     //LearnImage()
                     //LearnState()
+                    //LearnTopAppBar()
                 }
             }
         }
@@ -229,4 +240,48 @@ fun LearnStatePreview() {
     ComposeTheme {
         LearnState()
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LearnTopAppBar(){
+    /*
+        top barın gözükmesi için kod şöyle olmalı:
+        Surface(
+                    //modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+     */
+
+    val context = LocalContext.current.applicationContext
+
+    TopAppBar(title = { Text(text = "Arcana") },
+        navigationIcon = {
+            IconButton(onClick = { Toast.makeText(context, "Arcana", Toast.LENGTH_SHORT).show() }) {
+                Icon(painter = painterResource(id = R.drawable.tarot), contentDescription = "Tarot icon")
+            }
+        }, colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Beige,
+            titleContentColor = Color.Black,
+            navigationIconContentColor = Color.Black
+        ), actions = {
+            IconButton(onClick = { Toast.makeText(context, "Profile", Toast.LENGTH_SHORT).show() }) {
+                Icon(imageVector = Icons.Filled.Person, contentDescription = "Profile icon", tint = Color.Black)
+            }
+            IconButton(onClick = { Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show() }) {
+                Icon(imageVector = Icons.Filled.Search, contentDescription = "Search icon", tint = Color.Black)
+            }
+            IconButton(onClick = { Toast.makeText(context, "Menu", Toast.LENGTH_SHORT).show() }) {
+                Icon(imageVector = Icons.Filled.MoreVert, contentDescription = "Menu icon", tint = Color.Black)
+            }
+        }
+    )
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun LearnTopAppBarPreview() {
+    ComposeTheme {
+        LearnTopAppBar()
+        }
 }
