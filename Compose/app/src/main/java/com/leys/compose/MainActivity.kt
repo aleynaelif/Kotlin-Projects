@@ -1,5 +1,6 @@
 package com.leys.compose
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -13,29 +14,41 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,8 +60,12 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.leys.compose.ui.theme.Beige
 import com.leys.compose.ui.theme.ComposeTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +74,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeTheme {
                 Surface(
-                    //modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ){
                     //LearnTextAndModifiers()
@@ -67,6 +84,7 @@ class MainActivity : ComponentActivity() {
                     //LearnImage()
                     //LearnState()
                     //LearnTopAppBar()
+                    //LearnNavDrawer()
                 }
             }
         }
@@ -284,4 +302,105 @@ fun LearnTopAppBarPreview() {
     ComposeTheme {
         LearnTopAppBar()
         }
+}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LearnNavDrawer(){
+    val navigationController = rememberNavController()
+    val coroutineScope = rememberCoroutineScope()
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val context = LocalContext.current.applicationContext
+
+    ModalNavigationDrawer(drawerState = drawerState,
+        gesturesEnabled = true,
+        drawerContent = {
+            ModalDrawerSheet {
+                Box(modifier = Modifier
+                    .background(Beige)
+                    .fillMaxWidth()
+                    .height(150.dp)) {
+                    Text(text = "Arcana", modifier = Modifier.align(Alignment.Center))
+                }
+                Divider()
+                NavigationDrawerItem(
+                    label = { Text(text = "Home") },
+                    selected = false,
+                    icon = { Icon(imageVector = Icons.Filled.Home, contentDescription = "Home") },
+                    onClick = {
+                        coroutineScope.launch{
+                            drawerState.close()
+                        }
+                        navigationController.navigate(Screens.Home.screen){
+                            popUpTo(0)
+                        }
+                    })
+                NavigationDrawerItem(
+                    label = { Text(text = "Profile") },
+                    selected = false,
+                    icon = { Icon(imageVector = Icons.Filled.Person, contentDescription = "Profile") },
+                    onClick = {
+                        coroutineScope.launch{
+                            drawerState.close()
+                        }
+                        navigationController.navigate(Screens.Profile.screen){
+                            popUpTo(0)
+                        }
+                    })
+                NavigationDrawerItem(
+                    label = { Text(text = "Settings") },
+                    selected = false,
+                    icon = { Icon(imageVector = Icons.Filled.Settings, contentDescription = "Settings") },
+                    onClick = {
+                        coroutineScope.launch{
+                            drawerState.close()
+                        }
+                        navigationController.navigate(Screens.Settings.screen){
+                            popUpTo(0)
+                        }
+                    })
+
+                NavigationDrawerItem(
+                    label = { Text(text = "Logout") },
+                    selected = false,
+                    icon = { Icon(imageVector = Icons.Filled.ExitToApp, contentDescription = "Logout") },
+                    onClick = {
+                        coroutineScope.launch{
+                            drawerState.close()
+                        }
+                        Toast.makeText(context, "Logout", Toast.LENGTH_SHORT).show()
+                    })
+                }
+        },
+        ){
+        Scaffold (
+            topBar = {
+                val coroutineScope = rememberCoroutineScope()
+                TopAppBar(title = { Text(text = "Arcana") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Beige,
+                        titleContentColor = Color.Black,
+                        navigationIconContentColor = Color.Black
+                    ),
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            coroutineScope.launch {
+                                drawerState.open()
+                            }
+                        }) {
+                            Icon(Icons.Rounded.Menu, contentDescription = "MenuButton")
+                        }
+
+                    },
+                )
+            }
+        ){
+            NavHost(navController = navigationController, startDestination = Screens.Home.screen){
+                composable(Screens.Home.screen){ Home()}
+                composable(Screens.Profile.screen){ Profile()}
+                composable(Screens.Settings.screen){ Settings()}
+            }
+        }
+    }
 }
