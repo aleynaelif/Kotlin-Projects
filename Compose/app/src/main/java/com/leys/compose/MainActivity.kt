@@ -1,5 +1,6 @@
 package com.leys.compose
 
+import Notification
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
@@ -17,9 +18,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
@@ -27,16 +30,19 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationBarDefaults.containerColor
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -47,6 +53,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -85,6 +92,7 @@ class MainActivity : ComponentActivity() {
                     //LearnState()
                     //LearnTopAppBar()
                     //LearnNavDrawer()
+                    MyBottomAppBar()
                 }
             }
         }
@@ -402,5 +410,85 @@ fun LearnNavDrawer(){
                 composable(Screens.Settings.screen){ Settings()}
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LearnNavDrawerPreview() {
+    ComposeTheme {
+        LearnNavDrawer()
+    }
+}
+
+@Composable
+fun MyBottomAppBar(){
+    val navigationController = rememberNavController()
+    val context = LocalContext.current.applicationContext
+    val selected = remember {
+        mutableStateOf(Icons.Default.Home)
+    }
+
+    Scaffold (
+        bottomBar = {
+            BottomAppBar (
+                containerColor = Beige
+            ){
+                IconButton(onClick = {
+                    selected.value = Icons.Default.Home
+                    navigationController.navigate(Screens.Home.screen) {
+                        popUpTo(0)
+                    }
+                }, modifier = Modifier.weight(1f)) {
+                    Icon(Icons.Default.Home, contentDescription = null, modifier = Modifier.size(26.dp),
+                        tint = if (selected.value == Icons.Default.Home) Color.Black else Color.Gray)
+                }
+                IconButton(onClick = {
+                    selected.value = Icons.Default.Person
+                    navigationController.navigate(Screens.Profile.screen) {
+                        popUpTo(0)
+                    }
+                }, modifier = Modifier.weight(1f)) {
+                    Icon(Icons.Default.Person, contentDescription = null, modifier = Modifier.size(26.dp),
+                        tint = if (selected.value == Icons.Default.Home) Color.Black else Color.Gray)
+                }
+                IconButton(onClick = {
+                    selected.value = Icons.Default.Settings
+                    navigationController.navigate(Screens.Settings.screen) {
+                        popUpTo(0)
+                    }
+                }, modifier = Modifier.weight(1f)) {
+                    Icon(Icons.Default.Settings, contentDescription = null, modifier = Modifier.size(26.dp),
+                        tint = if (selected.value == Icons.Default.Home) Color.Black else Color.Gray)
+                }
+
+                Box(modifier = Modifier
+                    .weight(1f)
+                    .padding(16.dp),
+                    contentAlignment = Alignment.Center){
+                    FloatingActionButton(onClick = { Toast.makeText(context, "Open Bottom Sheet", Toast.LENGTH_SHORT).show() }) {
+                        Icon(Icons.Default.Add, contentDescription = null, tint = Beige)
+                    }
+                }
+            }
+            }
+    ){ paddingValues ->
+        NavHost(navController = navigationController,
+            startDestination = Screens.Home.screen,
+            modifier = Modifier.padding(paddingValues)){
+            composable(Screens.Home.screen){ Home()}
+            composable(Screens.Profile.screen){ Profile()}
+            composable(Screens.Settings.screen){ Settings()}
+            composable(Screens.Notification.screen){ Notification()}
+        }
+    }
+
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MyBottomAppBarPreview() {
+    ComposeTheme {
+        MyBottomAppBar()
     }
 }
