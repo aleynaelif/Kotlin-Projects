@@ -1,21 +1,39 @@
 import java.io.File
 
+val length =  5
+
 fun main() {
-    val fileName = "kelimeler.txt" // Replace with your file name
-    readFile(fileName)
+    val inputFileName = "kelimeler.txt"
+    val outputFileName = "BesHarfliKelimeler.txt"
+    readFileFilterAndWriteLines(inputFileName, outputFileName)
 }
 
-fun readFile(fileName: String) {
+fun readFileFilterAndWriteLines(inputFileName: String, outputFileName: String) {
     try {
-        val file = File(fileName)
-        if (file.exists()) {
-            file.forEachLine { line ->
-                println(line)
+        val inputFile = File(inputFileName)
+        val outputFile = File(outputFileName)
+
+        if (inputFile.exists()) {
+            val filteredLines = inputFile.readLines()
+                .map { it.lowercase() }
+                .filter { it.length == length && !it.containsSpecialCharsOrSpaces() }
+            
+            outputFile.printWriter().use { out ->
+                filteredLines.forEach { line ->
+                    out.println(line)
+                }
             }
+
+            println("Filtered lines have been written to $outputFileName")
         } else {
             println("File not found.")
         }
     } catch (e: Exception) {
-        println("An error occurred while reading the file: ${e.message}")
+        println("An error occurred while processing the file: ${e.message}")
     }
+}
+
+fun String.containsSpecialCharsOrSpaces(): Boolean {
+    val specialChars = listOf('î', 'â', 'û', ' ')
+    return this.any { it in specialChars }
 }
